@@ -1,4 +1,6 @@
-# LexAudit – AI-Powered Contract Intelligence Platform
+# LexAudit – AI-powered contract intelligence system that transforms legal documents into actionable risk insights.
+
+Live Demo: https://lex-audit.vercel.app
 
 ## Overview
 
@@ -312,7 +314,7 @@ LexAudit is designed to assist users in understanding contracts and identifying 
 The repository includes sample contracts under the `mock-data/` directory that were created exclusively for testing and demonstration purposes.
 
 Example file:
-- smaple_data/sample_employee_data.pdf
+- sample_data/sample_employee_data.pdf
 
 These sample agreements were used to validate:
 - Contract text extraction
@@ -322,6 +324,14 @@ These sample agreements were used to validate:
 - Executive summary generation
 - Contract comparison workflows
 - PDF report generation
+
+## Innovation Highlights
+
+- Rule-based + AI hybrid scoring system
+- Clause normalization to prevent AI hallucination
+- Missing legal protection detection engine
+- Real-time contract risk intelligence
+- Structured legal decision support system
 
 ##Author
 KOTHA KAPU HARINI REDDY
