@@ -305,5 +305,23 @@ Instead of producing only a generic summary, LexAudit generates actionable legal
 
 LexAudit is designed to assist users in understanding contracts and identifying potential risks. The platform does not constitute legal advice and should not replace consultation with qualified legal professionals for critical legal decisions.
 
+---
+
+## Mock Data
+
+The repository includes sample contracts under the `mock-data/` directory that were created exclusively for testing and demonstration purposes.
+
+Example file:
+- smaple_data/sample_employee_data.pdf
+
+These sample agreements were used to validate:
+- Contract text extraction
+- Clause detection and classification
+- Risk scoring logic
+- Missing clause identification
+- Executive summary generation
+- Contract comparison workflows
+- PDF report generation
+
 ##Author
 KOTHA KAPU HARINI REDDY
