@@ -145,35 +145,43 @@ const computeUnbalancedPenalty = (clauses) => {
  */
 const computeRiskScore = (clauses, missingClauses = []) => {
   if (!clauses.length && !missingClauses.length) {
-    return { score: 0, riskLevel: 'Low' };
+    return { score: 100, riskLevel: 'Low' };
   }
 
-  const highRiskCount = clauses.filter((c) => c.riskLevel === 'High').length;
+  // 1. Base score starts at SAFE 100
+  let score = 100;
 
+  // 2. Average severity penalty (balanced)
   const avgSeverity =
     clauses.length > 0
       ? clauses.reduce((sum, c) => sum + (c.severity || 1), 0) / clauses.length
       : 0;
 
-  const missingCount = missingClauses.length;
+  score -= avgSeverity * 3; // reduced impact (was 4+ additive earlier)
+
+  // 3. High risk clause penalty (controlled)
+  const highRiskCount = clauses.filter((c) => c.riskLevel === 'High').length;
+  score -= highRiskCount * 6;
+
+  // 4. Missing clauses penalty (weighted properly)
+  score -= missingClauses.length * 5;
+
+  // 5. Unbalanced penalty (keep but soften)
   const unbalancedPenalty = computeUnbalancedPenalty(clauses);
+  score -= unbalancedPenalty * 3;
 
-  const rawScore =
-    avgSeverity * 4 +
-    highRiskCount * 8 +
-    missingCount * 8 +
-    unbalancedPenalty * 5;
+  // 6. Clamp score
+  if (score < 0) score = 0;
+  if (score > 100) score = 100;
 
-  const score = Math.min(Math.round(rawScore), 100);
-
+  // 7. Risk mapping (IMPORTANT FIX)
   let riskLevel;
-  if (score <= 30) riskLevel = 'Low';
-  else if (score <= 60) riskLevel = 'Medium';
+  if (score >= 80) riskLevel = 'Low';
+  else if (score >= 60) riskLevel = 'Medium';
   else riskLevel = 'High';
 
-  return { score, riskLevel };
+  return { score: Math.round(score), riskLevel };
 };
-
 module.exports = {
   computeRiskScore,
   detectMissingClauses,
