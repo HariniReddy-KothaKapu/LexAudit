@@ -20,13 +20,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (name, email, password) => {
-    const res = await authAPI.register({ name, email, password });
-    const { token, user } = res.data;
-    localStorage.setItem('lexaudit_token', token);
-    localStorage.setItem('lexaudit_user', JSON.stringify(user));
-    setUser(user);
-    return user;
-  };
+  const res = await authAPI.register({ name, email, password });
+  console.log("REGISTER RESPONSE:", res.data); // ADD THIS
+  return res.data;
+};
 
   const logout = () => {
     localStorage.removeItem('lexaudit_token');
