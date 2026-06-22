@@ -1,64 +1,116 @@
-# LexAudit – AI Contract Risk Analyzer
+# LexAudit – AI-Powered Contract Intelligence Platform
 
-A production-quality MVP that helps businesses and individuals understand legal contracts before signing. Powered by Google Gemini AI.
+## Overview
 
-## Features
+LexAudit is an AI-powered contract intelligence platform that helps individuals, startups, freelancers, and businesses understand legal agreements before signing them.
 
-- **Contract Upload** — PDF & DOCX support with drag-and-drop
-- **Clause Detection** — Automatically identifies 10+ clause types
-- **AI Risk Analysis** — Risk level, severity score, business & legal impact per clause
-- **Plain-English Translation** — Simple explanations for every clause
-- **Negotiation Assistant** — Safer alternatives, talking points, and modified wording
-- **Risk Score Engine** — Custom 0–100 composite scoring algorithm
-- **Missing Clause Detection** — Alerts for missing critical protections
-- **Executive Summary** — Overview, top risks, and a Sign/Review/Do Not Sign verdict
-- **Dashboard** — Charts, stats, and recent activity
-- **Contract History** — Search, filter, and manage past analyses
+Legal contracts are often lengthy, complex, and difficult to interpret without legal expertise. Important clauses related to liability, confidentiality, intellectual property, termination rights, compliance obligations, and dispute resolution are frequently overlooked, exposing users to legal and financial risks.
+
+LexAudit simplifies contract review by automatically extracting clauses, identifying risks, detecting missing protections, generating executive summaries, comparing agreements, and producing downloadable PDF reports. The platform transforms complex legal language into actionable insights, enabling faster and more informed decision-making.
+
+---
+
+## Key Features
+
+### Contract Analysis
+
+* Upload PDF and DOCX contracts
+* Automated text extraction and processing
+* AI-powered clause identification and classification
+* Executive summary generation
+* Missing clause detection
+* Risk assessment and recommendations
+
+### Risk Intelligence
+
+* Custom risk scoring engine (0–100)
+* Clause-level severity analysis
+* Missing protection detection
+* Risk categorization (Low, Medium, High)
+* Contract health assessment
+
+### Contract Comparison
+
+* Side-by-side comparison of two agreements
+* Clause-level difference identification
+* AI-generated comparison summary
+* Change impact analysis
+
+### Reporting
+
+* Downloadable PDF analysis reports
+* Executive summaries
+* Risk breakdown reports
+* Comparison reports
+
+### Dashboard & History
+
+* Analysis statistics
+* Risk distribution charts
+* Recent activity tracking
+* Search and filter analysis history
+* Historical contract management
+
+### User Management
+
+* Secure authentication
+* User profiles
+* Account management
+* Personalized contract history
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React + Vite + Tailwind CSS |
-| Backend | Node.js + Express.js |
-| Database | MongoDB Atlas |
-| AI | Google Gemini 1.5 Flash |
-| PDF Parsing | pdf-parse |
-| DOCX Parsing | mammoth |
-| Auth | JWT + bcryptjs |
-| Charts | Recharts |
-| Deployment | Vercel (Frontend) + Render (Backend) |
+| Layer              | Technology              |
+| ------------------ | ----------------------- |
+| Frontend           | React 18 + Vite         |
+| Styling            | Tailwind CSS            |
+| Routing            | React Router DOM        |
+| API Communication  | Axios                   |
+| Charts & Analytics | Recharts                |
+| File Upload        | React Dropzone          |
+| Backend            | Node.js + Express.js    |
+| Database           | MongoDB Atlas           |
+| ODM                | Mongoose                |
+| Authentication     | JWT + bcryptjs          |
+| PDF Parsing        | pdf-parse               |
+| DOCX Parsing       | mammoth                 |
+| AI Engine          | Google Gemini 2.5 Flash |
+| PDF Generation     | jsPDF + jspdf-autotable |
+| Deployment         | Vercel + Render         |
 
 ---
 
 ## Project Structure
 
-```
+```text
 LexAudit/
 ├── backend/
 │   ├── src/
-│   │   ├── config/         # DB connection
-│   │   ├── controllers/    # Route handlers
-│   │   ├── middleware/     # Auth + upload middleware
-│   │   ├── models/         # Mongoose schemas
-│   │   ├── routes/         # Express routes
-│   │   ├── services/       # Gemini AI service
-│   │   ├── utils/          # Text extractor + scoring engine
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── utils/
 │   │   └── server.js
 │   ├── .env.example
 │   └── package.json
+│
 ├── frontend/
 │   ├── src/
-│   │   ├── components/     # Navbar, RiskBadge, RiskGauge, etc.
-│   │   ├── context/        # AuthContext
-│   │   ├── pages/          # All 8 pages
-│   │   ├── services/       # Axios API client
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── utils/
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   ├── .env.example
 │   └── package.json
+│
 └── README.md
 ```
 
@@ -67,153 +119,191 @@ LexAudit/
 ## Setup Instructions
 
 ### Prerequisites
-- Node.js 18+
-- MongoDB Atlas account
-- Google Gemini API key ([get one here](https://aistudio.google.com/app/apikey))
+
+* Node.js 18+
+* MongoDB Atlas Account
+* Google Gemini API Key
 
 ---
 
-### 1. Clone the repo
-
-```bash
-git clone <your-repo-url>
-cd LexAudit
-```
-
----
-
-### 2. Backend Setup
+## Backend Setup
 
 ```bash
 cd backend
-cp .env.example .env
 npm install
 ```
 
-Edit `.env` and fill in your values:
+Create a `.env` file:
 
 ```env
 PORT=5000
-MONGODB_URI=mongodb+srv://<user>:<password>@cluster0.xxxxx.mongodb.net/lexaudit
-JWT_SECRET=your_jwt_secret_here
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
 JWT_EXPIRES_IN=7d
-GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_API_KEY=your_gemini_api_key
 CLIENT_URL=http://localhost:5173
 NODE_ENV=development
 ```
 
-Start the backend:
+Run the backend:
 
 ```bash
 npm run dev
 ```
 
-The API will be running at `http://localhost:5000`.
+Backend URL:
+
+```text
+http://localhost:5000
+```
 
 ---
 
-### 3. Frontend Setup
+## Frontend Setup
 
 ```bash
 cd frontend
-cp .env.example .env
 npm install
-```
-
-The `.env` file for development uses the Vite proxy, so no changes needed.
-
-Start the frontend:
-
-```bash
 npm run dev
 ```
 
-The app will be at `http://localhost:5173`.
+Frontend URL:
+
+```text
+http://localhost:5173
+```
 
 ---
 
 ## Environment Variables
 
-### Backend (`backend/.env`)
+### Backend
 
-| Variable | Description |
-|----------|-------------|
-| `PORT` | Server port (default: 5000) |
-| `MONGODB_URI` | MongoDB Atlas connection string |
-| `JWT_SECRET` | Secret key for JWT signing |
-| `JWT_EXPIRES_IN` | Token expiry (e.g., `7d`) |
-| `GEMINI_API_KEY` | Google Gemini API key |
-| `CLIENT_URL` | Frontend URL for CORS |
-| `NODE_ENV` | `development` or `production` |
+| Variable       | Purpose                         |
+| -------------- | ------------------------------- |
+| PORT           | Backend server port             |
+| MONGODB_URI    | MongoDB Atlas connection string |
+| JWT_SECRET     | JWT signing secret              |
+| JWT_EXPIRES_IN | Token expiry duration           |
+| GEMINI_API_KEY | Gemini API key                  |
+| CLIENT_URL     | Frontend URL                    |
+| NODE_ENV       | Development/Production          |
 
-### Frontend (`frontend/.env`)
+### Frontend
 
-| Variable | Description |
-|----------|-------------|
-| `VITE_API_URL` | Backend API base URL (production only) |
+| Variable     | Purpose         |
+| ------------ | --------------- |
+| VITE_API_URL | Backend API URL |
 
-In development, the Vite proxy forwards `/api` requests to `localhost:5000` automatically.
+---
+
+## API Modules
+
+### Authentication
+
+* User Registration
+* User Login
+* JWT Authentication
+* Profile Management
+
+### Contract Management
+
+* Upload Contract
+* Analyze Contract
+* Retrieve Contract Details
+* View Analysis History
+* Delete Contract
+
+### Contract Comparison
+
+* Compare Two Agreements
+* Generate Difference Summary
+* Produce Comparison Reports
+
+---
+
+## Risk Scoring Engine
+
+LexAudit uses a custom contract risk assessment engine that combines:
+
+* Average clause severity
+* High-risk clause count
+* Missing critical clauses
+* Contract imbalance indicators
+
+The final score is normalized to a 0–100 scale and categorized into:
+
+| Score Range | Risk Level  |
+| ----------- | ----------- |
+| 0–30        | Low Risk    |
+| 31–60       | Medium Risk |
+| 61–100      | High Risk   |
 
 ---
 
 ## Deployment
 
-### Backend → Render
+### Frontend
 
-1. Push code to GitHub
-2. Create a new **Web Service** on [Render](https://render.com)
-3. Set **Build Command**: `npm install`
-4. Set **Start Command**: `node src/server.js`
-5. Add all environment variables from `.env`
-6. Set `CLIENT_URL` to your Vercel frontend URL
-7. Set `NODE_ENV=production`
+Hosted on Vercel.
 
-### Frontend → Vercel
+### Backend
 
-1. Import the `frontend/` folder on [Vercel](https://vercel.com)
-2. Set **Framework**: Vite
-3. Add environment variable: `VITE_API_URL=https://your-render-app.onrender.com/api`
-4. Deploy
+Hosted on Render.
+
+### Database
+
+MongoDB Atlas.
 
 ---
 
-## API Reference
+## Sample Workflow
 
-### Auth
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | `/api/auth/register` | No | Register new user |
-| POST | `/api/auth/login` | No | Login, returns JWT |
-| GET | `/api/auth/profile` | Yes | Get current user |
-| PUT | `/api/auth/profile` | Yes | Update name/email |
-
-### Contracts
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | `/api/contracts/upload` | Yes | Upload & analyze contract |
-| GET | `/api/contracts` | Yes | List user's contracts |
-| GET | `/api/contracts/stats` | Yes | Dashboard statistics |
-| GET | `/api/contracts/:id` | Yes | Get contract + clauses |
-| DELETE | `/api/contracts/:id` | Yes | Delete contract |
+1. User uploads a contract (PDF/DOCX).
+2. Text extraction engine processes the document.
+3. Contract content is sent to Gemini AI.
+4. Clauses are identified and categorized.
+5. Risk scoring engine calculates overall risk.
+6. Missing protections are detected.
+7. Executive summary is generated.
+8. Results are stored in MongoDB.
+9. Dashboard and reports are generated.
+10. User downloads a PDF report if required.
 
 ---
 
-## Risk Scoring Formula
+## Why LexAudit?
 
-```
-Risk Score = 
-  (high_risk_clause_count × 15) +
-  (average_severity × 5) +
-  (missing_critical_clause_count × 10) +
-  (unbalanced_obligations_penalty × 5)
-```
+LexAudit delivers significantly more value than uploading a contract directly into a general-purpose AI chatbot.
 
-Capped at 100. Categories: 0–30 = Low, 31–60 = Medium, 61–100 = High.
+The platform combines:
+
+* Structured contract analysis workflows
+* Contract-specific clause detection
+* Missing clause identification
+* Custom risk scoring logic
+* Contract comparison capabilities
+* Executive reporting
+* Historical analysis tracking
+* Downloadable PDF reports
+
+Instead of producing only a generic summary, LexAudit generates actionable legal intelligence through domain-specific processing, risk assessment, workflow automation, and decision-support mechanisms designed specifically for contract review.
 
 ---
 
-## License
+## Future Enhancements
 
-MIT License. LexAudit is not a substitute for professional legal advice.
+* Multi-jurisdiction legal frameworks
+* Regulatory compliance validation
+* Legal precedent integration
+* Team collaboration workflows
+* Advanced retrieval-augmented legal research
+
+---
+
+## Disclaimer
+
+LexAudit is designed to assist users in understanding contracts and identifying potential risks. The platform does not constitute legal advice and should not replace consultation with qualified legal professionals for critical legal decisions.
+
+##Author
+KOTHA KAPU HARINI REDDY
